@@ -3,7 +3,7 @@
  * History:
  * Created by Siyang.Miao on 2012-2-20
  */
-package com.example.progressdaemon;
+package com.example.progressdaemon.main;
 
 
 import android.text.TextUtils;

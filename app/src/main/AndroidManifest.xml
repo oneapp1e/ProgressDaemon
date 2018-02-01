@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.progressdaemon">
+    package="com.example.progressdaemon">
+
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.GET_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -8,16 +17,70 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service android:name=".LocalService"/>
-        <service android:name=".RemoteService" android:process=".remote"/>
+        <activity
+            android:name=".main.keep.KeepActivity"
+            android:excludeFromRecents="true"
+            android:taskAffinity="@string/account_type"
+            android:theme="@style/KeepTheme" />
+
+        <service android:name=".main.service.ForgroundService" />
+        <service android:name=".main.service.InnnerService" />
+
+        <service android:name=".main.service.StickService" />
+
+
+        <!--账户服务-->
+        <service android:name=".main.account.AuthenticationService">
+
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/accountauthenticator" />
+
+        </service>
+        <service android:name=".main.account.SyncService">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_adapter" />
+        </service>
+
+        <provider
+            android:name=".main.account.SyncProvider"
+            android:authorities="com.mlr.progress.daemon.provider" />
+
+
+        <service
+            android:name=".main.Jobschuduler.MyJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
+            android:name=".main.progress.LocalService"
+            android:exported="true" />
+        <service
+            android:name=".main.progress.LocalService$InnerService"
+            android:exported="true" />
+        <service
+            android:name=".main.progress.RemoteService"
+            android:exported="true"
+            android:process=":remote" />
+        <service
+            android:name=".main.progress.RemoteService$InnerService"
+            android:exported="true"
+            android:process=":remote" />
     </application>
 
 </manifest>
