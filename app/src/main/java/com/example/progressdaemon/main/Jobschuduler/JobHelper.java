@@ -27,7 +27,5 @@ public class JobHelper {
             }
             jobScheduler.schedule(builder.build());
         }
-
-
     }
 }

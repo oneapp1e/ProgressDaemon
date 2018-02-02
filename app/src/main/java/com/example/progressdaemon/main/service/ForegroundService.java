@@ -12,7 +12,7 @@ import com.example.progressdaemon.main.LogUtils;
 /**
  * Created by mulinrui on 2018/2/1.
  */
-public class ForgroundService extends Service {
+public class ForegroundService extends Service {
 
 
     @Nullable
@@ -25,7 +25,7 @@ public class ForgroundService extends Service {
     public void onCreate() {
         super.onCreate();
         //让服务变成前台服务
-        LogUtils.e(" ForgroundService 服务提权已经启动 ");
+        LogUtils.e(" ForegroundService 服务提权已经启动 ");
         startForeground(10, new Notification());
         //如果是18以上的设备  这样操作会在通知栏有一个通知，那再开启个服务把通知干掉
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -36,7 +36,7 @@ public class ForgroundService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.e(" ForgroundService 服务提权已经销毁 ");
+        LogUtils.e(" ForegroundService 服务提权已经销毁 ");
     }
 
 }

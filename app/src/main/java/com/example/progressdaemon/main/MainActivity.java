@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
         KeepManager.getInstance().registerKeep(this);
 
         //通过service 提权
-//        startService(new Intent(this, ForgroundService.class));
+//        startService(new Intent(this, ForegroundService.class));
 
         //通过stick拉活
 //        startService(new Intent(this, StickService.class));

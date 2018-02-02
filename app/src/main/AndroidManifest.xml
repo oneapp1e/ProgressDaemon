@@ -31,7 +31,7 @@
             android:taskAffinity="@string/account_type"
             android:theme="@style/KeepTheme" />
 
-        <service android:name=".main.service.ForgroundService" />
+        <service android:name=".main.service.ForegroundService" />
         <service android:name=".main.service.InnnerService" />
 
         <service android:name=".main.service.StickService" />
